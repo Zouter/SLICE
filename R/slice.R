@@ -2047,7 +2047,7 @@ getLM.clustering <- function(es, model.type="tree", cluster.method="kmeans",
   return(ret)
 }
 
-#' @importFrom princurve principal.curve
+#' @importFrom princurve principal_curve
 #' @importFrom grid arrow unit
 get.PC.Transitions <- function(es, model, start, end, do.trim=F, do.plot=T, context_str="", verbose = T) {
   requireNamespace("igraph")
@@ -2089,9 +2089,9 @@ get.PC.Transitions <- function(es, model, start, end, do.trim=F, do.plot=T, cont
       i.path.states <- cells.df$slice.state[which(rownames(cells.df) %in% i.path)]
       i.cells.df <- cells.df[which(cells.df$slice.state %in% i.path.states), ]
       i.cells.w <- (1-as.numeric(i.cells.df$entropy))
-      i.pcurve.fit <- princurve::principal.curve(as.matrix(i.cells.df[, dim.cols]), smoother="smooth.spline", w=i.cells.w, df=length(i.path)+1)
+      i.pcurve.fit <- princurve::principal_curve(as.matrix(i.cells.df[, dim.cols]), smoother="smooth.spline", w=i.cells.w, df=length(i.path)+1)
 
-      i.pseudotime <- as.data.frame(i.pcurve.fit$s[i.pcurve.fit$tag, ]) # correct direction
+      i.pseudotime <- as.data.frame(i.pcurve.fit$s[i.pcurve.fit$ord, ]) # correct direction
       s.id <- which(rownames(i.pseudotime)==i.start)
       e.id <- which(rownames(i.pseudotime)==i.end)
       if (s.id > e.id) {
@@ -2144,7 +2144,7 @@ get.PC.Transitions <- function(es, model, start, end, do.trim=F, do.plot=T, cont
   return(transition.paths)
 }
 
-#' @importFrom princurve principal.curve
+#' @importFrom princurve principal_curve
 #' @importFrom grid arrow unit
 get.PC.Transitions.stepwise <- function(es, model, start, end, do.trim=F, do.plot=T, context_str="", verbose = T) {
 
@@ -2189,9 +2189,9 @@ get.PC.Transitions.stepwise <- function(es, model, start, end, do.trim=F, do.plo
         i.path.states <- cells.df$slice.state[which(rownames(cells.df) %in% i.path)]
         i.cells.df <- cells.df[which(cells.df$slice.state %in% i.path.states), ]
         i.cells.w <- (1-as.numeric(i.cells.df$entropy))
-        i.pcurve.fit <- princurve::principal.curve(as.matrix(i.cells.df[, dim.cols]), smoother="smooth.spline", w=i.cells.w, df=length(i.path)+1)
+        i.pcurve.fit <- princurve::principal_curve(as.matrix(i.cells.df[, dim.cols]), smoother="smooth.spline", w=i.cells.w, df=length(i.path)+1)
 
-        i.pseudotime <- as.data.frame(i.pcurve.fit$s[i.pcurve.fit$tag, ]) # correct direction
+        i.pseudotime <- as.data.frame(i.pcurve.fit$s[i.pcurve.fit$ord, ]) # correct direction
         s.id <- which(rownames(i.pseudotime)==i.start)
         e.id <- which(rownames(i.pseudotime)==i.end)
         if (s.id > e.id) {
@@ -2232,8 +2232,8 @@ get.PC.Transitions.stepwise <- function(es, model, start, end, do.trim=F, do.plo
 
         i.jk.cells.df <- cells.df[which(cells.df$slice.state %in% c(i.j.state, i.k.state)), ]
         i.jk.cells.w <- (1-as.numeric(i.jk.cells.df$entropy))
-        i.jk.pcurve.fit <- princurve::principal.curve(as.matrix(i.jk.cells.df[, dim.cols]), smoother="smooth.spline", w=i.jk.cells.w, df=3)
-        i.jk.pseudotime <- as.data.frame(i.jk.pcurve.fit$s[i.jk.pcurve.fit$tag, ])
+        i.jk.pcurve.fit <- princurve::principal_curve(as.matrix(i.jk.cells.df[, dim.cols]), smoother="smooth.spline", w=i.jk.cells.w, df=3)
+        i.jk.pseudotime <- as.data.frame(i.jk.pcurve.fit$s[i.jk.pcurve.fit$ord, ])
 
         i.jk.s.id <- which(rownames(i.jk.pseudotime)==i.jk.start)
         i.jk.e.id <- which(rownames(i.jk.pseudotime)==i.jk.end)
@@ -2257,8 +2257,8 @@ get.PC.Transitions.stepwise <- function(es, model, start, end, do.trim=F, do.plo
 
           i.jk.cells.df <- cells.df[which(cells.df$slice.state %in% c(i.j.state, i.k.state)), ]
           i.jk.cells.w <- (1-as.numeric(i.jk.cells.df$entropy))
-          i.jk.pcurve.fit <- princurve::principal.curve(as.matrix(i.jk.cells.df[, dim.cols]), smoother="smooth.spline", w=i.jk.cells.w, df=3)
-          i.jk.pseudotime <- as.data.frame(i.jk.pcurve.fit$s[i.jk.pcurve.fit$tag, ])
+          i.jk.pcurve.fit <- princurve::principal_curve(as.matrix(i.jk.cells.df[, dim.cols]), smoother="smooth.spline", w=i.jk.cells.w, df=3)
+          i.jk.pseudotime <- as.data.frame(i.jk.pcurve.fit$s[i.jk.pcurve.fit$ord, ])
 
           i.jk.s.id <- which(rownames(i.jk.pseudotime)==i.jk.start)
           i.jk.e.id <- which(rownames(i.jk.pseudotime)==i.jk.end)
