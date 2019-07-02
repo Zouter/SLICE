@@ -19,7 +19,7 @@ Imports:
   lmtest,
   methods,
   mgcv, 
-  princurve, 
+  princurve (>= 2.1.4), 
   reshape2,
   splines
 Maintainer: Minzhe Guo <minzhe.guo@cchmc.org>
